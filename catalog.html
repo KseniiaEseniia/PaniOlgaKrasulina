@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Каталог — Pani Olga Krasulina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:    #F5F1EB;
+  --beige:    #E6D7C9;
+  --milk:     #FAF7F3;
+  --burg:     #7A2E2E;
+  --burg-d:   #5E2222;
+  --olive:    #6B7A4F;
+  --rose:     #C48A8A;
+  --graphite: #2B2B2B;
+  --mid:      #5A5A5A;
+  --light:    #8A8A8A;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Jost',sans-serif; background:var(--cream); color:var(--graphite); overflow-x:hidden; }
+
+/* NAV */
+.nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 60px; height:68px;
+  background:rgba(245,241,235,0.94);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(122,46,46,0.10);
+  transition:box-shadow .3s;
+}
+.nav.scrolled { box-shadow:0 2px 24px rgba(43,43,43,0.07); }
+.nav-logo {
+  font-family:'Cormorant Garamond',serif;
+  font-size:19px; font-weight:600; letter-spacing:.04em;
+  color:var(--graphite); text-decoration:none;
+}
+.nav-logo span { color:var(--burg); }
+.nav-links { display:flex; gap:36px; list-style:none; }
+.nav-links a {
+  font-size:12px; font-weight:400; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--mid);
+  text-decoration:none; transition:color .25s;
+}
+.nav-links a:hover, .nav-links a.active { color:var(--burg); }
+.nav-right { display:flex; align-items:center; gap:20px; }
+.lang-sw { display:flex; gap:4px; }
+.lang-btn {
+  background:none; border:1px solid transparent; padding:5px 9px; border-radius:2px;
+  font-family:'Jost',sans-serif; font-size:11px; letter-spacing:.08em;
+  cursor:pointer; color:var(--light); transition:all .25s;
+}
+.lang-btn.active, .lang-btn:hover { border-color:var(--burg); color:var(--burg); }
+.nav-cta {
+  background:var(--burg); color:#fff; border:none; padding:10px 22px;
+  font-family:'Jost',sans-serif; font-size:11px; font-weight:500;
+  letter-spacing:.12em; text-transform:uppercase; cursor:pointer;
+  text-decoration:none; transition:background .25s;
+}
+.nav-cta:hover { background:var(--burg-d); }
+
+/* PAGE HEADER */
+.page-header {
+  padding:120px 80px 60px;
+  background:var(--milk);
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:flex-end;
+  gap:40px;
+  border-bottom:1px solid var(--beige);
+}
+
+.page-header-left {}
+
+.breadcrumb {
+  display:flex; align-items:center; gap:8px;
+  font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--light); margin-bottom:20px;
+}
+.breadcrumb a { color:var(--light); text-decoration:none; transition:color .25s; }
+.breadcrumb a:hover { color:var(--burg); }
+.breadcrumb span { color:var(--burg); }
+
+.page-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(42px,5vw,72px); font-weight:300;
+  line-height:1.05;
+}
+.page-title em { font-style:italic; color:var(--burg); }
+
+.page-header-right {
+  text-align:right;
+}
+.items-count {
+  font-family:'Cormorant Garamond',serif;
+  font-size:56px; font-weight:300; color:var(--burg);
+  line-height:1; display:block;
+}
+.items-label {
+  font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--light); display:block; margin-top:4px;
+}
+
+/* FILTERS */
+.filters-bar {
+  background:var(--cream);
+  padding:24px 80px;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:20px;
+  border-bottom:1px solid var(--beige);
+  position:sticky; top:68px; z-index:100;
+}
+
+.filter-groups { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+
+.filter-label {
+  font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--light); margin-right:8px;
+}
+
+.filter-btn {
+  background:none; border:1px solid var(--beige);
+  padding:8px 18px; border-radius:0;
+  font-family:'Jost',sans-serif; font-size:12px; letter-spacing:.06em;
+  cursor:pointer; color:var(--mid); transition:all .25s;
+}
+.filter-btn:hover { border-color:var(--burg); color:var(--burg); }
+.filter-btn.active {
+  background:var(--burg); border-color:var(--burg); color:#fff;
+}
+
+.sort-wrap { display:flex; align-items:center; gap:10px; }
+.sort-label { font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--light); }
+.sort-select {
+  background:none; border:1px solid var(--beige);
+  padding:8px 14px; font-family:'Jost',sans-serif;
+  font-size:12px; color:var(--graphite); cursor:pointer;
+  outline:none; transition:border-color .25s;
+}
+.sort-select:hover { border-color:var(--burg); }
+
+/* CATALOG GRID */
+.catalog-section { padding:48px 80px 96px; }
+
+.catalog-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+}
+
+.product-card {
+  position:relative; aspect-ratio:2/3;
+  overflow:hidden; cursor:pointer;
+  background:var(--beige);
+}
+
+.product-bg {
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:80px; transition:transform .6s ease;
+}
+.product-card:nth-child(1)  .product-bg { background:#EAD9C8; }
+.product-card:nth-child(2)  .product-bg { background:#E2D0C0; }
+.product-card:nth-child(3)  .product-bg { background:#EDE3D9; }
+.product-card:nth-child(4)  .product-bg { background:#E5D8CA; }
+.product-card:nth-child(5)  .product-bg { background:#E8DACE; }
+.product-card:nth-child(6)  .product-bg { background:#EBE0D5; }
+.product-card:nth-child(7)  .product-bg { background:#E0CFC0; }
+.product-card:nth-child(8)  .product-bg { background:#EFE6DC; }
+.product-card:nth-child(9)  .product-bg { background:#E3D5C5; }
+.product-card:hover .product-bg { transform:scale(1.07); }
+
+.product-tag {
+  position:absolute; top:16px; left:16px;
+  background:var(--burg); color:#fff;
+  font-size:9px; letter-spacing:.12em; text-transform:uppercase;
+  padding:4px 10px; z-index:2;
+}
+.product-tag.olive { background:var(--olive); }
+.product-tag.rose  { background:var(--rose); }
+
+.product-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(43,43,43,.78) 0%, transparent 50%);
+  opacity:0; transition:opacity .4s;
+  display:flex; flex-direction:column;
+  justify-content:flex-end; padding:24px 20px;
+}
+.product-card:hover .product-overlay { opacity:1; }
+
+.product-info { color:#fff; }
+.product-name {
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px; font-weight:400;
+  display:block; margin-bottom:6px;
+}
+.product-desc-short {
+  font-size:12px; opacity:.7; margin-bottom:10px;
+  display:block; line-height:1.5;
+}
+.product-price { font-size:13px; opacity:.9; display:block; margin-bottom:14px; }
+
+.product-btn {
+  display:inline-block; background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.4);
+  color:#fff; padding:8px 18px;
+  font-family:'Jost',sans-serif; font-size:11px;
+  letter-spacing:.1em; text-transform:uppercase;
+  text-decoration:none; transition:background .25s;
+  cursor:pointer;
+}
+.product-btn:hover { background:rgba(255,255,255,.25); }
+
+/* hidden cards */
+.product-card.hidden { display:none; }
+
+/* EMPTY STATE */
+.empty-state {
+  display:none; grid-column:1/-1;
+  text-align:center; padding:80px 40px;
+}
+.empty-state.show { display:block; }
+.empty-icon { font-size:56px; margin-bottom:20px; }
+.empty-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:32px; font-weight:300; color:var(--graphite); margin-bottom:12px;
+}
+.empty-sub { font-size:14px; color:var(--light); }
+
+/* LIGHTBOX */
+.lightbox {
+  position:fixed; inset:0; z-index:500;
+  background:rgba(43,43,43,.85);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; pointer-events:none;
+  transition:opacity .35s;
+}
+.lightbox.open { opacity:1; pointer-events:all; }
+
+.lb-inner {
+  background:var(--milk); max-width:900px; width:90%;
+  display:grid; grid-template-columns:1fr 1fr;
+  max-height:90vh; overflow:hidden;
+  position:relative;
+}
+
+.lb-visual {
+  background:var(--beige);
+  display:flex; align-items:center; justify-content:center;
+  font-size:120px; min-height:400px;
+}
+
+.lb-content { padding:48px 40px; overflow-y:auto; display:flex; flex-direction:column; justify-content:center; }
+
+.lb-tag {
+  display:inline-block; background:var(--burg); color:#fff;
+  font-size:9px; letter-spacing:.12em; text-transform:uppercase;
+  padding:4px 10px; margin-bottom:20px; align-self:flex-start;
+}
+.lb-tag.olive { background:var(--olive); }
+.lb-tag.rose  { background:var(--rose); }
+
+.lb-name {
+  font-family:'Cormorant Garamond',serif;
+  font-size:38px; font-weight:300; line-height:1.1;
+  margin-bottom:8px;
+}
+.lb-name em { font-style:italic; color:var(--burg); }
+
+.lb-price {
+  font-size:18px; color:var(--burg);
+  font-family:'Cormorant Garamond',serif;
+  margin-bottom:24px; display:block;
+}
+
+.lb-desc {
+  font-size:14px; line-height:1.85; color:var(--mid);
+  margin-bottom:28px;
+}
+
+.lb-details { margin-bottom:32px; }
+.lb-detail {
+  display:flex; justify-content:space-between;
+  padding:10px 0; border-bottom:1px solid var(--beige);
+  font-size:13px;
+}
+.lb-detail-label { color:var(--light); letter-spacing:.05em; }
+.lb-detail-val { color:var(--graphite); font-weight:400; }
+
+.lb-actions { display:flex; flex-direction:column; gap:10px; }
+
+.lb-btn-primary {
+  background:var(--burg); color:#fff; border:none;
+  padding:14px 28px; font-family:'Jost',sans-serif;
+  font-size:12px; font-weight:500; letter-spacing:.12em;
+  text-transform:uppercase; cursor:pointer; text-decoration:none;
+  display:block; text-align:center; transition:background .25s;
+}
+.lb-btn-primary:hover { background:var(--burg-d); }
+
+.lb-btn-ghost {
+  background:transparent; color:var(--graphite);
+  border:1px solid rgba(43,43,43,.25); padding:14px 28px;
+  font-family:'Jost',sans-serif; font-size:12px;
+  letter-spacing:.12em; text-transform:uppercase;
+  cursor:pointer; text-decoration:none; display:block;
+  text-align:center; transition:all .25s;
+}
+.lb-btn-ghost:hover { border-color:var(--burg); color:var(--burg); }
+
+.lb-close {
+  position:absolute; top:16px; right:16px;
+  background:none; border:none; cursor:pointer;
+  font-size:24px; color:var(--mid); line-height:1;
+  transition:color .25s; z-index:2;
+}
+.lb-close:hover { color:var(--burg); }
+
+/* CTA BAND */
+.cta-band {
+  background:var(--burg); color:#fff; padding:72px 80px;
+  display:flex; align-items:center; justify-content:space-between; gap:40px;
+}
+.cta-band-text h2 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(28px,3.2vw,48px); font-weight:300; line-height:1.1; margin-bottom:10px;
+}
+.cta-band-text h2 em { font-style:italic; color:var(--rose); }
+.cta-band-text p { font-size:14px; color:rgba(255,255,255,.65); line-height:1.7; }
+.cta-band-btns { display:flex; gap:14px; flex-shrink:0; }
+.btn-white {
+  background:#fff; color:var(--burg); border:none; padding:14px 30px;
+  font-family:'Jost',sans-serif; font-size:12px; font-weight:500;
+  letter-spacing:.12em; text-transform:uppercase; cursor:pointer;
+  text-decoration:none; display:inline-block; transition:all .25s;
+}
+.btn-white:hover { background:var(--cream); }
+.btn-ghost-white {
+  background:transparent; color:#fff;
+  border:1px solid rgba(255,255,255,.4); padding:14px 30px;
+  font-family:'Jost',sans-serif; font-size:12px; letter-spacing:.12em;
+  text-transform:uppercase; cursor:pointer; text-decoration:none;
+  display:inline-block; transition:all .25s;
+}
+.btn-ghost-white:hover { border-color:#fff; background:rgba(255,255,255,.08); }
+
+/* FOOTER */
+footer {
+  background:var(--graphite); color:rgba(255,255,255,.4);
+  padding:36px 80px; display:flex; justify-content:space-between;
+  align-items:center; font-size:12px; letter-spacing:.05em;
+}
+.footer-logo { font-family:'Cormorant Garamond',serif; font-size:18px; color:rgba(255,255,255,.7); }
+.footer-links { display:flex; gap:24px; }
+.footer-links a { color:rgba(255,255,255,.4); text-decoration:none; transition:color .25s; }
+.footer-links a:hover { color:rgba(255,255,255,.7); }
+
+/* REVEAL */
+.reveal { opacity:0; transform:translateY(24px); transition:opacity .7s ease,transform .7s ease; }
+.reveal.in { opacity:1; transform:translateY(0); }
+.reveal-d1 { transition-delay:.08s; }
+.reveal-d2 { transition-delay:.16s; }
+.reveal-d3 { transition-delay:.24s; }
+.reveal-d4 { transition-delay:.32s; }
+.reveal-d5 { transition-delay:.40s; }
+.reveal-d6 { transition-delay:.48s; }
+
+/* MOBILE */
+@media(max-width:900px){
+  .nav { padding:0 24px; }
+  .nav-links { display:none; }
+  .page-header { padding:100px 24px 48px; grid-template-columns:1fr; }
+  .page-header-right { text-align:left; }
+  .filters-bar { padding:16px 24px; flex-direction:column; align-items:flex-start; gap:12px; }
+  .catalog-section { padding:32px 24px 72px; }
+  .catalog-grid { grid-template-columns:repeat(2,1fr); }
+  .lb-inner { grid-template-columns:1fr; max-height:95vh; }
+  .lb-visual { min-height:220px; font-size:80px; }
+  .lb-content { padding:28px 24px; }
+  .cta-band { flex-direction:column; padding:56px 24px; text-align:center; }
+  .cta-band-btns { flex-direction:column; width:100%; }
+  footer { flex-direction:column; gap:16px; text-align:center; padding:28px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <a href="index.html" class="nav-logo">Pani Olga <span>Krasulina</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-key="nav_home">Головна</a></li>
+    <li><a href="catalog.html" class="active" data-key="nav_catalog">Каталог</a></li>
+    <li><a href="custom.html" data-key="nav_custom">Кастом</a></li>
+    <li><a href="about.html" data-key="nav_about">Про мене</a></li>
+    <li><a href="b2b.html" data-key="nav_b2b">B2B</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-sw">
+      <button class="lang-btn active" onclick="setLang('uk')">UA</button>
+      <button class="lang-btn" onclick="setLang('pl')">PL</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="custom.html" class="nav-cta" data-key="nav_cta">Замовити</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-left">
+    <div class="breadcrumb">
+      <a href="index.html" data-key="nav_home">Головна</a>
+      <span>→</span>
+      <span data-key="nav_catalog">Каталог</span>
+    </div>
+    <h1 class="page-title" data-key="page_title">Готові <em>роботи</em></h1>
+  </div>
+  <div class="page-header-right">
+    <span class="items-count" id="itemsCount">9</span>
+    <span class="items-label" data-key="items_label">робіт у каталозі</span>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters-bar">
+  <div class="filter-groups">
+    <span class="filter-label" data-key="filter_label">Фільтр:</span>
+    <button class="filter-btn active" data-filter="all" data-key="f_all">Всі</button>
+    <button class="filter-btn" data-filter="flowers" data-key="f_flowers">Квіти</button>
+    <button class="filter-btn" data-filter="animals" data-key="f_animals">Тварини</button>
+    <button class="filter-btn" data-filter="abstract" data-key="f_abstract">Абстракт</button>
+    <button class="filter-btn" data-filter="nature" data-key="f_nature">Природа</button>
+    <button class="filter-btn" data-filter="custom" data-key="f_custom">Кастом</button>
+  </div>
+  <div class="sort-wrap">
+    <span class="sort-label" data-key="sort_label">Сортування:</span>
+    <select class="sort-select" id="sortSelect" onchange="sortProducts()">
+      <option value="default" data-key="sort_default">За замовчуванням</option>
+      <option value="price-asc" data-key="sort_asc">Ціна: від низької</option>
+      <option value="price-desc" data-key="sort_desc">Ціна: від високої</option>
+    </select>
+  </div>
+</div>
+
+<!-- CATALOG -->
+<section class="catalog-section">
+  <div class="catalog-grid" id="catalogGrid">
+
+    <div class="product-card reveal" data-category="flowers" data-price="850" onclick="openLightbox(0)">
+      <div class="product-bg">🌸</div>
+      <div class="product-tag" data-key="tag_new">Нове</div>
+      <div class="product-overlay">
+        <div class="product-info">
+          <span class="product-name" data-key="p1_name">«Цвітіння»</span>
+          <span class="product-desc-short" data-key="p1_short">Ніжна брошка з польових квітів</span>
+          <span class="product-price" data-key="p1_price">від 850 грн</span>
+          <span class="product-btn" data-key="btn_details">Детальніше</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card reveal reveal-d1" data-category="animals" data-price="950" onclick="openLightbox(1)">
+      <div class="product-bg">🦋</div>
+      <div class="product-tag olive" data-key="tag_best">Хіт</div>
+      <div class="product-overlay">
+        <div class="product-info">
+          <span class="product-name" data-key="p2_name">«Метелик»</span>
+          <span class="product-desc-short" data-key="p2_short">Витончений метелик у пастельних тонах</span>
+          <span class="product-price" data-key="p2_price">від 950 грн</span>
+          <span class="product-btn" data-key="btn_details">Детальніше</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card reveal reveal-d2" data-category="nature" data-price="780" onclick="openLightbox(2)">
+      <div class="product-bg">🌿</div>
+      <div class="product-overlay">
+        <div class="product-info">
+          <span class="product-name" data-key="p3_name">«Лісова»</span>
+          <span class="product-desc-short" data-key="p3_short">Гілочка з оливковим бісером</span>
+          <span class="product-price" data-key="p3_price">від 780 грн</span>
+          <span class="product-btn" data-key="btn_details">Детальніше</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card reveal reveal-d3" data-category="flowers" data-price="1100" onclick="openLightbox(3)">
+      <div class="product-bg">🌹</div>
+      <div class="product-tag rose" data-key="tag_limited">Лімітована</div>
+      <div class="product-overlay">
+        <div class="product-info">
+          <span class="product-name" data-key="p4_name">«Троянда»</span>
+          <span class="product-desc-short" data-key="p4_short">Класична троянда з бордовим акцентом</span>
+          <span class="product-price" data-key="p4_price">від 1100 грн</span>
+          <span class="product-btn" data-key="btn_details">Детальніше</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card reveal reveal-d4" data-category="animals" data-price="990" onclick="openLightbox(4)">
+      <div class="product-bg">🐦</div>
+      <div class="product-overlay">
+        <div class="product-info">
+          <span class="product-name" data-key="p5_name">«Синиця»</span>
+          <span class="product-desc-short" data-key="p5_short">Пташка у блакитно-жовтих тонах</span>
+          <span class="product-price" data-key="p5_price">від 990 грн</span>
+          <span class="product-btn" data-key="btn_details">Детальніше</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card reveal reveal-d5" data-category="custom" data-price="1200" onclick="openLightbox(5)">
+      <div class="product-bg">⭐</div>
+      <div class="product-tag" data-key="tag_custom">Кастом</div>
+      <div class="product-overlay">
+        <div class="product-info">
+          <span class="product-name" data-key="p6_name">«Зірка»</span>
+          <span class="product-desc-short" data-key="p6_short">Зроблена за фото клієнтки</span>
+          <span class="product-price" data-key="p6_price">від 1200 грн</span>
+          <span class="product-btn" data-key="btn_details">Детальніше</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card reveal" data-category="abstract" data-price="870" onclick="openLightbox(6)">
+      <div class="product-bg">🔮</div>
+      <div class="product-overlay">
+        <div class="product-info">
+          <span class="product-name" data-key="p7_name">«Туман»</span>
+          <span class="product-desc-short" data-key="p7_short">Абстрактна форма у сіро-синіх тонах</span>
+          <span class="product-price" data-key="p7_price">від 870 грн</span>
+          <span class="product-btn" data-key="btn_details">Детальніше</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card reveal reveal-d1" data-category="nature" data-price="920" onclick="openLightbox(7)">
+      <div class="product-bg">🍂</div>
+      <div class="product-tag olive" data-key="tag_best">Хіт</div>
+      <div class="product-overlay">
+        <div class="product-info">
+          <span class="product-name" data-key="p8_name">«Осінь»</span>
+          <span class="product-desc-short" data-key="p8_short">Листя клена у золотистих відтінках</span>
+          <span class="product-price" data-key="p8_price">від 920 грн</span>
+          <span class="product-btn" data-key="btn_details">Детальніше</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card reveal reveal-d2" data-category="flowers" data-price="1050" onclick="openLightbox(8)">
+      <div class="product-bg">🌻</div>
+      <div class="product-overlay">
+        <div class="product-info">
+          <span class="product-name" data-key="p9_name">«Соняшник»</span>
+          <span class="product-desc-short" data-key="p9_short">Яскрава літня брошка</span>
+          <span class="product-price" data-key="p9_price">від 1050 грн</span>
+          <span class="product-btn" data-key="btn_details">Детальніше</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty-state" id="emptyState">
+      <div class="empty-icon">🔍</div>
+      <div class="empty-title" data-key="empty_title">Нічого не знайдено</div>
+      <div class="empty-sub" data-key="empty_sub">Спробуйте інший фільтр або замовте кастом-брошку</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+  <div class="lb-inner">
+    <div class="lb-visual" id="lbVisual">🌸</div>
+    <div class="lb-content">
+      <span class="lb-tag" id="lbTag">Нове</span>
+      <h2 class="lb-name" id="lbName">«Цвітіння»</h2>
+      <span class="lb-price" id="lbPrice">від 850 грн</span>
+      <p class="lb-desc" id="lbDesc">Ніжна брошка, натхненна польовими квітами. Вишита вручну з японського бісеру Miyuki. Кожна деталь продумана — від кольорового поєднання до форми застібки.</p>
+      <div class="lb-details" id="lbDetails">
+        <div class="lb-detail">
+          <span class="lb-detail-label" data-key="lb_size">Розмір</span>
+          <span class="lb-detail-val" id="lbSize">6 × 5 см</span>
+        </div>
+        <div class="lb-detail">
+          <span class="lb-detail-label" data-key="lb_material">Матеріал</span>
+          <span class="lb-detail-val" data-key="lb_material_val">Бісер Miyuki, металева основа</span>
+        </div>
+        <div class="lb-detail">
+          <span class="lb-detail-label" data-key="lb_time">Термін виготовлення</span>
+          <span class="lb-detail-val" data-key="lb_time_val">7–14 днів</span>
+        </div>
+      </div>
+      <div class="lb-actions">
+        <a href="custom.html" class="lb-btn-primary" data-key="lb_order">Замовити цю брошку</a>
+        <button class="lb-btn-ghost" onclick="closeLightbox()" data-key="lb_close">Закрити</button>
+      </div>
+    </div>
+    <button class="lb-close" onclick="closeLightbox()">✕</button>
+  </div>
+</div>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="cta-band-text">
+    <h2 data-key="cta_h">Не знайшли те,<br>що шукали? Замовте <em>своє</em></h2>
+    <p data-key="cta_p">Я створю брошку за вашим фото, ескізом або описом</p>
+  </div>
+  <div class="cta-band-btns">
+    <a href="custom.html" class="btn-white" data-key="cta_b1">Кастом-замовлення</a>
+    <a href="index.html" class="btn-ghost-white" data-key="cta_b2">На головну</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Pani Olga Krasulina</div>
+  <div class="footer-links">
+    <a href="catalog.html" data-key="nav_catalog">Каталог</a>
+    <a href="custom.html" data-key="nav_custom">Кастом</a>
+    <a href="about.html" data-key="nav_about">Про мене</a>
+    <a href="b2b.html" data-key="nav_b2b">B2B</a>
+  </div>
+  <div>© 2026 · Україна · Польща</div>
+</footer>
+
+<script>
+// ── PRODUCT DATA ──
+const PRODUCTS = [
+  { emoji:'🌸', tag:'new',      name_uk:'«Цвітіння»',  name_pl:'«Kwitnienie»',  name_en:'«Blossom»',   price_uk:'від 850 грн', price_pl:'od 85 zł', price_en:'from €22', size:'6 × 5 см', desc_uk:'Ніжна брошка, натхненна польовими квітами. Вишита вручну з японського бісеру Miyuki. Кожна деталь продумана — від кольорового поєднання до форми застібки.', desc_pl:'Delikatna broszka inspirowana polnymi kwiatami. Haftowana ręcznie z japońskich koralików Miyuki. Każdy detal przemyślany.', desc_en:'A delicate brooch inspired by wildflowers. Hand-embroidered with Japanese Miyuki beads. Every detail is considered — from the color palette to the clasp design.' },
+  { emoji:'🦋', tag:'best',     name_uk:'«Метелик»',   name_pl:'«Motylek»',     name_en:'«Butterfly»', price_uk:'від 950 грн', price_pl:'od 95 zł', price_en:'from €25', size:'7 × 6 см', desc_uk:'Витончений метелик у ніжних пастельних тонах. Крила виконані у техніці щільної вишивки — кожне крило займає кілька годин роботи.', desc_pl:'Wyszukany motyl w delikatnych pastelowych barwach. Skrzydła wykonane techniką gęstego haftu.', desc_en:'An elegant butterfly in soft pastel tones. The wings are crafted using dense embroidery technique — each wing takes several hours of work.' },
+  { emoji:'🌿', tag:'',         name_uk:'«Лісова»',    name_pl:'«Leśna»',       name_en:'«Forest»',    price_uk:'від 780 грн', price_pl:'od 78 zł', price_en:'from €20', size:'5 × 4 см', desc_uk:'Гілочка з оливковим бісером — мінімалістична і елегантна. Ідеальна для тих, хто любить природний стиль.', desc_pl:'Gałązka z oliwkowymi koralikami — minimalistyczna i elegancka. Idealna dla miłośniczek naturalnego stylu.', desc_en:'A twig with olive-toned beads — minimalist and elegant. Perfect for lovers of natural style.' },
+  { emoji:'🌹', tag:'limited',  name_uk:'«Троянда»',   name_pl:'«Róża»',        name_en:'«Rose»',      price_uk:'від 1100 грн',price_pl:'od 110 zł',price_en:'from €29', size:'6 × 6 см', desc_uk:'Класична троянда з бордовим акцентом. Лімітована серія — лише 5 штук. Кожна трохи відрізняється відтінком бісеру.', desc_pl:'Klasyczna róża z bordowym akcentem. Limitowana seria — tylko 5 sztuk.', desc_en:'A classic rose with a burgundy accent. Limited series — only 5 pieces. Each one differs slightly in bead shade.' },
+  { emoji:'🐦', tag:'',         name_uk:'«Синиця»',    name_pl:'«Sikorka»',     name_en:'«Sparrow»',   price_uk:'від 990 грн', price_pl:'od 99 zł', price_en:'from €26', size:'6 × 5 см', desc_uk:'Пташка у блакитно-жовтих тонах. Детально промальована — видно кожне пір'ячко. Улюблениця клієнток.', desc_pl:'Ptaszek w błękitno-żółtych barwach. Szczegółowo opracowany — widać każde piórko.', desc_en:'A bird in blue-yellow tones. Intricately detailed — every feather is visible. A client favorite.' },
+  { emoji:'⭐', tag:'custom',   name_uk:'«Зірка»',     name_pl:'«Gwiazda»',     name_en:'«Star»',      price_uk:'від 1200 грн',price_pl:'od 120 zł',price_en:'from €32', size:'7 × 7 см', desc_uk:'Кастом-замовлення, зроблене за фото клієнтки. Особлива форма зірки з унікальним переходом кольорів — від рожевого до золотого.', desc_pl:'Zamówienie custom wykonane wg zdjęcia klientki. Wyjątkowa forma gwiazdy z przejściem kolorów.', desc_en:'A custom order made from a client\'s photo. A unique star shape with a color gradient from pink to gold.' },
+  { emoji:'🔮', tag:'',         name_uk:'«Туман»',     name_pl:'«Mgła»',        name_en:'«Mist»',      price_uk:'від 870 грн', price_pl:'od 87 zł', price_en:'from €23', size:'5 × 5 см', desc_uk:'Абстрактна форма у сіро-синіх тонах. Для тих, хто цінує геометрію і мінімалізм у прикрасах.', desc_pl:'Abstrakcyjna forma w szaro-niebieskich barwach. Dla tych, którzy cenią geometrię w biżuterii.', desc_en:'An abstract form in grey-blue tones. For those who value geometry and minimalism in jewelry.' },
+  { emoji:'🍂', tag:'best',     name_uk:'«Осінь»',     name_pl:'«Jesień»',      name_en:'«Autumn»',    price_uk:'від 920 грн', price_pl:'od 92 zł', price_en:'from €24', size:'7 × 5 см', desc_uk:'Листя клена у золотистих і теракотових відтінках. Ідеальний подарунок на осінь та для любительок природи.', desc_pl:'Liście klonu w złocistych i terakotowych odcieniach. Idealny prezent na jesień.', desc_en:'Maple leaves in golden and terracotta shades. An ideal autumn gift for nature lovers.' },
+  { emoji:'🌻', tag:'',         name_uk:'«Соняшник»',  name_pl:'«Słonecznik»',  name_en:'«Sunflower»', price_uk:'від 1050 грн',price_pl:'od 105 zł',price_en:'from €28', size:'7 × 7 см', desc_uk:'Яскрава літня брошка — велика і помітна. Зроблена з жовтого і коричневого бісеру. Піднімає настрій одним своїм виглядом.', desc_pl:'Jasna letnia broszka — duża i wyrazista. Wykonana z żółtych i brązowych koralików.', desc_en:'A bright summer brooch — large and eye-catching. Made with yellow and brown beads. Instantly lifts the mood.' },
+];
+
+const TAG_LABELS = {
+  new:     { uk:'Нове',       pl:'Nowość',    en:'New' },
+  best:    { uk:'Хіт',        pl:'Hit',       en:'Bestseller' },
+  limited: { uk:'Лімітована', pl:'Limitowana',en:'Limited' },
+  custom:  { uk:'Кастом',     pl:'Custom',    en:'Custom' },
+};
+
+const TAG_CLASSES = { new:'', best:'olive', limited:'rose', custom:'' };
+
+// ── TRANSLATIONS ──
+const T = {
+  uk:{
+    nav_home:'Головна',nav_catalog:'Каталог',nav_custom:'Кастом',nav_about:'Про мене',nav_b2b:'B2B',nav_cta:'Замовити',
+    page_title_html:'Готові <em>роботи</em>',
+    items_label:'робіт у каталозі',
+    filter_label:'Фільтр:',
+    f_all:'Всі',f_flowers:'Квіти',f_animals:'Тварини',f_abstract:'Абстракт',f_nature:'Природа',f_custom:'Кастом',
+    sort_label:'Сортування:',
+    sort_default:'За замовчуванням',sort_asc:'Ціна: від низької',sort_desc:'Ціна: від високої',
+    tag_new:'Нове',tag_best:'Хіт',tag_limited:'Лімітована',tag_custom:'Кастом',
+    btn_details:'Детальніше',
+    p1_short:'Ніжна брошка з польових квітів',
+    p2_short:'Витончений метелик у пастельних тонах',
+    p3_short:'Гілочка з оливковим бісером',
+    p4_short:'Класична троянда з бордовим акцентом',
+    p5_short:'Пташка у блакитно-жовтих тонах',
+    p6_short:'Зроблена за фото клієнтки',
+    p7_short:'Абстрактна форма у сіро-синіх тонах',
+    p8_short:'Листя клена у золотистих відтінках',
+    p9_short:'Яскрава літня брошка',
+    empty_title:'Нічого не знайдено',
+    empty_sub:'Спробуйте інший фільтр або замовте кастом-брошку',
+    lb_size:'Розмір',lb_material:'Матеріал',lb_material_val:'Бісер Miyuki, металева основа',
+    lb_time:'Термін виготовлення',lb_time_val:'7–14 днів',
+    lb_order:'Замовити цю брошку',lb_close:'Закрити',
+    cta_h_html:'Не знайшли те,<br>що шукали? Замовте <em>своє</em>',
+    cta_p:'Я створю брошку за вашим фото, ескізом або описом',
+    cta_b1:'Кастом-замовлення',cta_b2:'На головну',
+  },
+  pl:{
+    nav_home:'Strona główna',nav_catalog:'Katalog',nav_custom:'Custom',nav_about:'O mnie',nav_b2b:'B2B',nav_cta:'Zamów',
+    page_title_html:'Gotowe <em>prace</em>',
+    items_label:'prac w katalogu',
+    filter_label:'Filtr:',
+    f_all:'Wszystkie',f_flowers:'Kwiaty',f_animals:'Zwierzęta',f_abstract:'Abstrakt',f_nature:'Natura',f_custom:'Custom',
+    sort_label:'Sortowanie:',
+    sort_default:'Domyślne',sort_asc:'Cena: od niskiej',sort_desc:'Cena: od wysokiej',
+    tag_new:'Nowość',tag_best:'Hit',tag_limited:'Limitowana',tag_custom:'Custom',
+    btn_details:'Szczegóły',
+    p1_short:'Delikatna broszka z polnych kwiatów',
+    p2_short:'Wyszukany motyl w pastelowych barwach',
+    p3_short:'Gałązka z oliwkowymi koralikami',
+    p4_short:'Klasyczna róża z bordowym akcentem',
+    p5_short:'Ptaszek w błękitno-żółtych barwach',
+    p6_short:'Wykonana wg zdjęcia klientki',
+    p7_short:'Abstrakcyjna forma w szaro-niebieskich barwach',
+    p8_short:'Liście klonu w złocistych odcieniach',
+    p9_short:'Jasna letnia broszka',
+    empty_title:'Nic nie znaleziono',
+    empty_sub:'Spróbuj innego filtru lub zamów broszkę custom',
+    lb_size:'Rozmiar',lb_material:'Materiał',lb_material_val:'Koraliki Miyuki, metalowa baza',
+    lb_time:'Czas realizacji',lb_time_val:'7–14 dni',
+    lb_order:'Zamów tę broszkę',lb_close:'Zamknij',
+    cta_h_html:'Nie znalazłeś tego,<br>czego szukałeś? Zamów <em>swoje</em>',
+    cta_p:'Stworzę broszkę wg Twojego zdjęcia, szkicu lub opisu',
+    cta_b1:'Zamówienie custom',cta_b2:'Strona główna',
+  },
+  en:{
+    nav_home:'Home',nav_catalog:'Catalog',nav_custom:'Custom',nav_about:'About',nav_b2b:'B2B',nav_cta:'Order',
+    page_title_html:'Ready-made <em>pieces</em>',
+    items_label:'pieces in catalog',
+    filter_label:'Filter:',
+    f_all:'All',f_flowers:'Flowers',f_animals:'Animals',f_abstract:'Abstract',f_nature:'Nature',f_custom:'Custom',
+    sort_label:'Sort:',
+    sort_default:'Default',sort_asc:'Price: low to high',sort_desc:'Price: high to low',
+    tag_new:'New',tag_best:'Bestseller',tag_limited:'Limited',tag_custom:'Custom',
+    btn_details:'Details',
+    p1_short:'A delicate wildflower brooch',
+    p2_short:'An elegant butterfly in pastel tones',
+    p3_short:'A twig with olive-toned beads',
+    p4_short:'A classic rose with burgundy accent',
+    p5_short:'A bird in blue-yellow tones',
+    p6_short:'Made from a client\'s photo',
+    p7_short:'Abstract form in grey-blue tones',
+    p8_short:'Maple leaves in golden shades',
+    p9_short:'A bright summer brooch',
+    empty_title:'Nothing found',
+    empty_sub:'Try another filter or order a custom brooch',
+    lb_size:'Size',lb_material:'Material',lb_material_val:'Miyuki beads, metal base',
+    lb_time:'Production time',lb_time_val:'7–14 days',
+    lb_order:'Order this brooch',lb_close:'Close',
+    cta_h_html:'Didn\'t find what<br>you were looking for? Order <em>yours</em>',
+    cta_p:'I\'ll create a brooch from your photo, sketch or description',
+    cta_b1:'Custom order',cta_b2:'Home',
+  }
+};
+
+let lang = 'uk';
+let currentFilter = 'all';
+
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${l}')"]`).classList.add('active');
+  const t = T[l];
+
+  const htmlKeys = ['page_title_html','cta_h_html'];
+  document.querySelectorAll('[data-key]').forEach(el=>{
+    const k = el.getAttribute('data-key');
+    if(htmlKeys.includes(k) && t[k]) el.innerHTML = t[k];
+    else if(t[k] !== undefined) el.textContent = t[k];
+  });
+
+  // Update sort options text
+  const sel = document.getElementById('sortSelect');
+  sel.options[0].text = t.sort_default;
+  sel.options[1].text = t.sort_asc;
+  sel.options[2].text = t.sort_desc;
+
+  // Update lightbox if open
+  if(currentLbIndex >= 0) renderLightbox(currentLbIndex);
+
+  document.documentElement.lang = l==='uk'?'uk':l==='pl'?'pl':'en';
+}
+
+// ── FILTER ──
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.getAttribute('data-filter');
+    applyFilter();
+  });
+});
+
+function applyFilter(){
+  const cards = document.querySelectorAll('.product-card');
+  let visible = 0;
+  cards.forEach(card=>{
+    const cat = card.getAttribute('data-category');
+    const show = currentFilter==='all' || cat===currentFilter;
+    card.classList.toggle('hidden', !show);
+    if(show) visible++;
+  });
+  document.getElementById('itemsCount').textContent = visible;
+  document.getElementById('emptyState').classList.toggle('show', visible===0);
+}
+
+// ── SORT ──
+function sortProducts(){
+  const val = document.getElementById('sortSelect').value;
+  const grid = document.getElementById('catalogGrid');
+  const cards = Array.from(document.querySelectorAll('.product-card'));
+  const empty = document.getElementById('emptyState');
+
+  cards.sort((a,b)=>{
+    if(val==='price-asc') return +a.dataset.price - +b.dataset.price;
+    if(val==='price-desc') return +b.dataset.price - +a.dataset.price;
+    return 0;
+  });
+
+  cards.forEach(c=>grid.insertBefore(c, empty));
+}
+
+// ── LIGHTBOX ──
+let currentLbIndex = -1;
+
+function openLightbox(idx){
+  currentLbIndex = idx;
+  renderLightbox(idx);
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function renderLightbox(idx){
+  const p = PRODUCTS[idx];
+  const l = lang;
+  document.getElementById('lbVisual').textContent = p.emoji;
+  document.getElementById('lbName').textContent = p['name_'+l] || p.name_uk;
+  document.getElementById('lbPrice').textContent = p['price_'+l] || p.price_uk;
+  document.getElementById('lbSize').textContent = p.size;
+  document.getElementById('lbDesc').textContent = p['desc_'+l] || p.desc_uk;
+
+  const tagEl = document.getElementById('lbTag');
+  if(p.tag){
+    tagEl.style.display='inline-block';
+    tagEl.textContent = TAG_LABELS[p.tag][l] || TAG_LABELS[p.tag].uk;
+    tagEl.className = 'lb-tag ' + (TAG_CLASSES[p.tag] || '');
+  } else {
+    tagEl.style.display='none';
+  }
+
+  const t = T[l];
+  document.getElementById('lbDetails').querySelectorAll('[data-key]').forEach(el=>{
+    const k = el.getAttribute('data-key');
+    if(t[k]) el.textContent = t[k];
+  });
+}
+
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow='';
+  currentLbIndex = -1;
+}
+
+function closeLightboxOutside(e){
+  if(e.target === document.getElementById('lightbox')) closeLightbox();
+}
+
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeLightbox(); });
+
+// ── NAVBAR SCROLL ──
+window.addEventListener('scroll',()=>{
+  document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40);
+});
+
+// ── SCROLL REVEAL ──
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
