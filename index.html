@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pani Olga Krasulina — Авторські броші ручної роботи</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:    #F5F1EB;
+  --beige:    #E6D7C9;
+  --milk:     #FAF7F3;
+  --burg:     #7A2E2E;
+  --burg-d:   #5E2222;
+  --olive:    #6B7A4F;
+  --rose:     #C48A8A;
+  --graphite: #2B2B2B;
+  --mid:      #5A5A5A;
+  --light:    #8A8A8A;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Jost',sans-serif; background:var(--cream); color:var(--graphite); overflow-x:hidden; }
+
+/* NAV */
+.nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 60px; height:68px;
+  background:rgba(245,241,235,0.94);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(122,46,46,0.10);
+  transition:box-shadow .3s;
+}
+.nav.scrolled { box-shadow:0 2px 24px rgba(43,43,43,0.07); }
+
+.nav-logo {
+  font-family:'Cormorant Garamond',serif;
+  font-size:19px; font-weight:600; letter-spacing:.04em;
+  color:var(--graphite); text-decoration:none;
+}
+.nav-logo span { color:var(--burg); }
+
+.nav-links { display:flex; gap:36px; list-style:none; }
+.nav-links a {
+  font-size:12px; font-weight:400; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--mid);
+  text-decoration:none; transition:color .25s;
+}
+.nav-links a:hover, .nav-links a.active { color:var(--burg); }
+
+.nav-right { display:flex; align-items:center; gap:20px; }
+
+.lang-sw { display:flex; gap:4px; }
+.lang-btn {
+  background:none; border:1px solid transparent;
+  padding:5px 9px; border-radius:2px;
+  font-family:'Jost',sans-serif; font-size:11px;
+  letter-spacing:.08em; cursor:pointer;
+  color:var(--light); transition:all .25s;
+}
+.lang-btn.active, .lang-btn:hover { border-color:var(--burg); color:var(--burg); }
+
+.nav-cta {
+  background:var(--burg); color:#fff; border:none;
+  padding:10px 22px; font-family:'Jost',sans-serif;
+  font-size:11px; font-weight:500; letter-spacing:.12em;
+  text-transform:uppercase; cursor:pointer; text-decoration:none;
+  transition:background .25s;
+}
+.nav-cta:hover { background:var(--burg-d); }
+
+/* HERO */
+.hero {
+  min-height:100vh; padding-top:68px;
+  display:grid; grid-template-columns:1fr 1fr;
+  overflow:hidden;
+}
+
+.hero-left {
+  display:flex; flex-direction:column; justify-content:center;
+  padding:80px 64px 80px 80px; position:relative; z-index:2;
+}
+
+.eyebrow {
+  display:flex; align-items:center; gap:14px;
+  font-size:10px; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--burg); margin-bottom:28px;
+  opacity:0; animation:slideUp .8s .1s forwards;
+}
+.eyebrow::before { content:''; width:36px; height:1px; background:var(--burg); flex-shrink:0; }
+
+.hero-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(52px,6.5vw,90px); font-weight:300;
+  line-height:1.03; color:var(--graphite); margin-bottom:16px;
+  opacity:0; animation:slideUp .8s .22s forwards;
+}
+.hero-title em { font-style:italic; color:var(--burg); }
+
+.hero-sub {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(18px,2vw,26px); font-weight:300; font-style:italic;
+  color:var(--mid); margin-bottom:36px; line-height:1.5;
+  opacity:0; animation:slideUp .8s .34s forwards;
+}
+
+.hero-body {
+  font-size:14.5px; line-height:1.85; color:var(--mid);
+  max-width:400px; margin-bottom:48px;
+  opacity:0; animation:slideUp .8s .44s forwards;
+}
+
+.hero-btns {
+  display:flex; gap:14px; flex-wrap:wrap;
+  opacity:0; animation:slideUp .8s .54s forwards;
+}
+
+.btn-primary {
+  background:var(--burg); color:#fff; border:none;
+  padding:15px 34px; font-family:'Jost',sans-serif;
+  font-size:12px; font-weight:500; letter-spacing:.14em; text-transform:uppercase;
+  cursor:pointer; text-decoration:none; display:inline-block;
+  transition:background .3s, transform .2s;
+}
+.btn-primary:hover { background:var(--burg-d); transform:translateY(-1px); }
+
+.btn-ghost {
+  background:transparent; color:var(--graphite);
+  border:1px solid rgba(43,43,43,0.3); padding:15px 34px;
+  font-family:'Jost',sans-serif; font-size:12px;
+  font-weight:400; letter-spacing:.14em; text-transform:uppercase;
+  cursor:pointer; text-decoration:none; display:inline-block;
+  transition:all .3s;
+}
+.btn-ghost:hover { border-color:var(--burg); color:var(--burg); }
+
+.scroll-hint {
+  position:absolute; bottom:36px; left:80px;
+  display:flex; align-items:center; gap:10px;
+  font-size:10px; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--light); opacity:0; animation:fadeIn 1s 1.2s forwards;
+}
+.scroll-hint::after {
+  content:''; width:1px; height:36px; background:var(--burg);
+  animation:scrollLine 2s 1.5s infinite;
+}
+@keyframes scrollLine {
+  0%,100%{ transform:scaleY(1);opacity:1; } 50%{ transform:scaleY(.4);opacity:.4; }
+}
+
+.hero-right { position:relative; background:var(--beige); overflow:hidden; }
+
+.hero-mosaic { position:absolute; inset:0; display:grid; grid-template-rows:60% 40%; }
+
+.mosaic-top {
+  display:flex; align-items:center; justify-content:center; position:relative;
+}
+
+.mosaic-ring {
+  position:absolute; width:300px; height:300px;
+  border:1px solid rgba(122,46,46,0.14); border-radius:50%;
+  top:50%; left:50%; transform:translate(-50%,-50%);
+  animation:rotateSlow 30s linear infinite;
+}
+.mosaic-ring::before {
+  content:''; position:absolute; inset:24px;
+  border:1px solid rgba(122,46,46,0.07); border-radius:50%;
+}
+@keyframes rotateSlow { to { transform:translate(-50%,-50%) rotate(360deg); } }
+
+.mosaic-icon {
+  font-size:96px; position:relative; z-index:1;
+  animation:float 4s ease-in-out infinite;
+}
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+
+.mosaic-bottom { display:grid; grid-template-columns:1fr 1fr; border-top:2px solid rgba(255,255,255,.5); }
+.mosaic-cell {
+  display:flex; align-items:center; justify-content:center;
+  font-size:40px; transition:background .4s;
+  border-left:2px solid rgba(255,255,255,.5);
+}
+.mosaic-cell:first-child { border-left:none; }
+.mosaic-cell.dark { background:var(--burg); }
+.mosaic-cell:not(.dark):hover { background:var(--rose); }
+
+.hero-badge {
+  position:absolute; top:40px; left:-20px;
+  background:var(--milk); padding:18px 22px;
+  box-shadow:0 12px 48px rgba(43,43,43,.10); z-index:3; width:185px;
+  opacity:0; animation:badgeIn .9s .7s forwards;
+}
+@keyframes badgeIn { from{opacity:0;transform:translateX(-30px)} to{opacity:1;transform:translateX(0)} }
+.badge-num {
+  font-family:'Cormorant Garamond',serif;
+  font-size:38px; font-weight:300; color:var(--burg); display:block; line-height:1;
+}
+.badge-text { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--mid); margin-top:4px; display:block; }
+
+/* ABOUT STRIP */
+.about-strip { background:var(--milk); display:grid; grid-template-columns:1fr 1fr; }
+
+.about-visual { position:relative; min-height:520px; background:var(--beige); overflow:hidden; }
+.about-big-emoji {
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  font-size:130px;
+}
+.about-quote-card {
+  position:absolute; bottom:36px; right:-28px;
+  background:#fff; padding:24px 28px;
+  box-shadow:0 16px 56px rgba(43,43,43,.10); max-width:220px; z-index:2;
+}
+.about-quote-card p {
+  font-family:'Cormorant Garamond',serif;
+  font-size:15px; font-style:italic; line-height:1.55; color:var(--graphite);
+}
+.about-quote-card cite {
+  display:block; margin-top:12px; font-size:11px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--burg); font-style:normal;
+}
+
+.about-content { padding:80px 72px 80px 60px; display:flex; flex-direction:column; justify-content:center; }
+
+.section-label {
+  display:flex; align-items:center; gap:14px;
+  font-size:10px; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--burg); margin-bottom:20px;
+}
+.section-label::before { content:''; width:32px; height:1px; background:var(--burg); flex-shrink:0; }
+
+.section-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(34px,3.8vw,56px); font-weight:300; line-height:1.08; margin-bottom:28px;
+}
+.section-title em { font-style:italic; color:var(--burg); }
+
+.about-content p { font-size:14.5px; line-height:1.9; color:var(--mid); margin-bottom:18px; }
+
+.stats-row { display:flex; margin-top:40px; border-top:1px solid var(--beige); padding-top:36px; }
+.stat { flex:1; text-align:center; border-right:1px solid var(--beige); }
+.stat:last-child { border-right:none; }
+.stat-n { font-family:'Cormorant Garamond',serif; font-size:44px; font-weight:300; color:var(--burg); display:block; line-height:1; }
+.stat-l { font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--light); margin-top:6px; display:block; }
+
+/* CATALOG PREVIEW */
+.catalog-section { padding:96px 80px; background:var(--cream); }
+
+.section-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:56px; }
+
+.view-all {
+  font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--burg); text-decoration:none;
+  display:flex; align-items:center; gap:8px;
+  border-bottom:1px solid transparent; transition:border-color .25s; padding-bottom:2px;
+}
+.view-all:hover { border-color:var(--burg); }
+.view-all::after { content:'→'; font-size:14px; }
+
+.catalog-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; }
+
+.product-card { position:relative; aspect-ratio:2/3; overflow:hidden; cursor:pointer; }
+
+.product-bg {
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:70px; transition:transform .6s ease;
+}
+.product-card:nth-child(1) .product-bg { background:#EAD9C8; }
+.product-card:nth-child(2) .product-bg { background:#E2D0C0; }
+.product-card:nth-child(3) .product-bg { background:#EDE3D9; }
+.product-card:nth-child(4) .product-bg { background:#E5D8CA; }
+.product-card:hover .product-bg { transform:scale(1.07); }
+
+.product-tag {
+  position:absolute; top:16px; left:16px;
+  background:var(--burg); color:#fff;
+  font-size:9px; letter-spacing:.12em; text-transform:uppercase; padding:4px 10px; z-index:2;
+}
+.product-tag.olive { background:var(--olive); }
+
+.product-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(43,43,43,.72) 0%, transparent 55%);
+  opacity:0; transition:opacity .4s;
+  display:flex; align-items:flex-end; padding:24px 20px;
+}
+.product-card:hover .product-overlay { opacity:1; }
+.product-info { color:#fff; }
+.product-name { font-family:'Cormorant Garamond',serif; font-size:20px; display:block; margin-bottom:4px; }
+.product-price { font-size:12px; opacity:.8; }
+
+/* REVIEWS */
+.reviews-section { padding:96px 80px; background:var(--milk); }
+
+.reviews-track {
+  display:flex; gap:20px; margin-top:52px;
+  overflow-x:auto; padding-bottom:8px;
+  scroll-snap-type:x mandatory; scrollbar-width:none;
+}
+.reviews-track::-webkit-scrollbar { display:none; }
+
+.review-card {
+  min-width:320px; flex-shrink:0; background:var(--cream);
+  padding:36px 32px; border-top:3px solid var(--burg);
+  scroll-snap-align:start; transition:box-shadow .3s;
+}
+.review-card:hover { box-shadow:0 16px 48px rgba(43,43,43,.08); }
+.review-stars { color:var(--burg); font-size:13px; letter-spacing:4px; margin-bottom:20px; }
+.review-body {
+  font-family:'Cormorant Garamond',serif; font-size:18px;
+  font-weight:300; font-style:italic; line-height:1.62;
+  color:var(--graphite); margin-bottom:28px;
+}
+.review-footer { display:flex; align-items:center; gap:14px; }
+.review-ava {
+  width:42px; height:42px; border-radius:50%; background:var(--beige);
+  flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:20px;
+}
+.review-name { font-size:13px; font-weight:500; color:var(--graphite); }
+.review-loc { font-size:11px; color:var(--light); margin-top:2px; }
+
+/* CTA BAND */
+.cta-band {
+  background:var(--burg); color:#fff; padding:72px 80px;
+  display:flex; align-items:center; justify-content:space-between; gap:40px;
+}
+.cta-band-text h2 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(30px,3.5vw,50px); font-weight:300; line-height:1.1; margin-bottom:12px;
+}
+.cta-band-text h2 em { font-style:italic; color:var(--rose); }
+.cta-band-text p { font-size:14px; color:rgba(255,255,255,.65); line-height:1.7; }
+.cta-band-btns { display:flex; gap:14px; flex-shrink:0; }
+
+.btn-white {
+  background:#fff; color:var(--burg); border:none;
+  padding:15px 34px; font-family:'Jost',sans-serif;
+  font-size:12px; font-weight:500; letter-spacing:.14em; text-transform:uppercase;
+  cursor:pointer; text-decoration:none; display:inline-block; transition:all .25s;
+}
+.btn-white:hover { background:var(--cream); }
+
+.btn-ghost-white {
+  background:transparent; color:#fff;
+  border:1px solid rgba(255,255,255,.4); padding:15px 34px;
+  font-family:'Jost',sans-serif; font-size:12px;
+  font-weight:400; letter-spacing:.14em; text-transform:uppercase;
+  cursor:pointer; text-decoration:none; display:inline-block; transition:all .25s;
+}
+.btn-ghost-white:hover { border-color:#fff; background:rgba(255,255,255,.08); }
+
+/* FOOTER */
+footer {
+  background:var(--graphite); color:rgba(255,255,255,.4);
+  padding:36px 80px; display:flex; justify-content:space-between;
+  align-items:center; font-size:12px; letter-spacing:.05em;
+}
+.footer-logo { font-family:'Cormorant Garamond',serif; font-size:18px; color:rgba(255,255,255,.7); }
+.footer-links { display:flex; gap:24px; }
+.footer-links a { color:rgba(255,255,255,.4); text-decoration:none; transition:color .25s; }
+.footer-links a:hover { color:rgba(255,255,255,.7); }
+
+/* ANIMATIONS */
+@keyframes slideUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn  { from{opacity:0} to{opacity:1} }
+
+.reveal { opacity:0; transform:translateY(36px); transition:opacity .8s ease,transform .8s ease; }
+.reveal.in { opacity:1; transform:translateY(0); }
+.reveal-d1 { transition-delay:.1s; }
+.reveal-d2 { transition-delay:.22s; }
+.reveal-d3 { transition-delay:.34s; }
+
+/* MOBILE */
+@media(max-width:900px){
+  .nav { padding:0 24px; }
+  .nav-links { display:none; }
+  .hero { grid-template-columns:1fr; }
+  .hero-left { padding:80px 24px 56px; }
+  .hero-right { height:300px; }
+  .hero-badge { display:none; }
+  .scroll-hint { left:24px; }
+  .about-strip { grid-template-columns:1fr; }
+  .about-visual { min-height:260px; }
+  .about-quote-card { right:16px; bottom:16px; }
+  .about-content { padding:48px 24px; }
+  .catalog-section,.reviews-section { padding:64px 24px; }
+  .catalog-grid { grid-template-columns:repeat(2,1fr); }
+  .cta-band { flex-direction:column; padding:56px 24px; text-align:center; }
+  .cta-band-btns { flex-direction:column; width:100%; }
+  footer { flex-direction:column; gap:16px; text-align:center; padding:28px 24px; }
+  .section-header { flex-direction:column; align-items:flex-start; gap:16px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="mainNav">
+  <a href="index.html" class="nav-logo">Pani Olga <span>Krasulina</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active" data-key="nav_home">Головна</a></li>
+    <li><a href="catalog.html" data-key="nav_catalog">Каталог</a></li>
+    <li><a href="custom.html" data-key="nav_custom">Кастом</a></li>
+    <li><a href="about.html" data-key="nav_about">Про мене</a></li>
+    <li><a href="b2b.html" data-key="nav_b2b">B2B</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-sw">
+      <button class="lang-btn active" onclick="setLang('uk')">UA</button>
+      <button class="lang-btn" onclick="setLang('pl')">PL</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="custom.html" class="nav-cta" data-key="nav_cta">Замовити</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="eyebrow" data-key="hero_eyebrow">Ручна робота · Авторський дизайн</div>
+    <h1 class="hero-title">Броші, що<br><em>розповідають</em><br>вашу історію</h1>
+    <p class="hero-sub" data-key="hero_sub">Кожна — єдина у своєму роді</p>
+    <p class="hero-body" data-key="hero_body">Авторські прикраси з бісеру, створені вручну з любов'ю до деталей. Від готових виробів до брошей за вашим фото — я втілюю будь-яку ідею.</p>
+    <div class="hero-btns">
+      <a href="catalog.html" class="btn-primary" data-key="hero_btn1">Переглянути каталог</a>
+      <a href="custom.html" class="btn-ghost" data-key="hero_btn2">Створити свою</a>
+    </div>
+    <div class="scroll-hint" data-key="scroll_hint">Гортайте</div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-badge">
+      <span class="badge-num">200+</span>
+      <span class="badge-text" data-key="badge_text">авторських робіт</span>
+    </div>
+    <div class="hero-mosaic">
+      <div class="mosaic-top">
+        <div class="mosaic-ring"></div>
+        <div class="mosaic-icon">🪡</div>
+      </div>
+      <div class="mosaic-bottom">
+        <div class="mosaic-cell">🌸</div>
+        <div class="mosaic-cell dark">✦</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-strip" id="about">
+  <div class="about-visual reveal">
+    <div class="about-big-emoji">🌺</div>
+    <div class="about-quote-card">
+      <p data-key="quote_text">"Кожна брошка — маленьке мистецтво, яке ви носите з собою"</p>
+      <cite>— Ольга</cite>
+    </div>
+  </div>
+  <div class="about-content">
+    <div class="section-label reveal" data-key="about_label">Про майстра</div>
+    <h2 class="section-title reveal">Мене звуть<br><em>Ольга</em></h2>
+    <p class="reveal reveal-d1" data-key="about_p1">Я створюю броші з бісеру вже кілька років. Кожна робота — не просто прикраса. Це діалог між майстром і тим, хто її носитиме.</p>
+    <p class="reveal reveal-d2" data-key="about_p2">Мій підхід — тепло, увага до деталей і справжня ручна робота. Без масового виробництва. Без поспіху. Тільки якість і любов до справи.</p>
+    <div class="stats-row reveal reveal-d3">
+      <div class="stat"><span class="stat-n">200+</span><span class="stat-l" data-key="stat1">Робіт</span></div>
+      <div class="stat"><span class="stat-n">5★</span><span class="stat-l" data-key="stat2">Рейтинг</span></div>
+      <div class="stat"><span class="stat-n">UA+PL</span><span class="stat-l" data-key="stat3">Доставка</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CATALOG PREVIEW -->
+<section class="catalog-section" id="catalog">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label" data-key="cat_label">Колекція</div>
+      <h2 class="section-title" style="margin-bottom:0">Готові <em>роботи</em></h2>
+    </div>
+    <a href="catalog.html" class="view-all" data-key="view_all">Весь каталог</a>
+  </div>
+  <div class="catalog-grid">
+    <div class="product-card reveal">
+      <div class="product-bg">🌸</div>
+      <div class="product-tag" data-key="tag_new">Нове</div>
+      <div class="product-overlay"><div class="product-info">
+        <span class="product-name" data-key="p1_name">«Цвітіння»</span>
+        <span class="product-price" data-key="p1_price">від 850 грн</span>
+      </div></div>
+    </div>
+    <div class="product-card reveal reveal-d1">
+      <div class="product-bg">🦋</div>
+      <div class="product-tag olive" data-key="tag_best">Хіт</div>
+      <div class="product-overlay"><div class="product-info">
+        <span class="product-name" data-key="p2_name">«Метелик»</span>
+        <span class="product-price" data-key="p2_price">від 950 грн</span>
+      </div></div>
+    </div>
+    <div class="product-card reveal reveal-d2">
+      <div class="product-bg">🌿</div>
+      <div class="product-overlay"><div class="product-info">
+        <span class="product-name" data-key="p3_name">«Лісова»</span>
+        <span class="product-price" data-key="p3_price">від 780 грн</span>
+      </div></div>
+    </div>
+    <div class="product-card reveal reveal-d3">
+      <div class="product-bg">🌹</div>
+      <div class="product-overlay"><div class="product-info">
+        <span class="product-name" data-key="p4_name">«Троянда»</span>
+        <span class="product-price" data-key="p4_price">від 1100 грн</span>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label" data-key="rev_label">Відгуки</div>
+      <h2 class="section-title" style="margin-bottom:0">Що кажуть <em>клієнти</em></h2>
+    </div>
+  </div>
+  <div class="reviews-track">
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-body" data-key="r1">"Замовляла брошку з фото моєї кішки. Ольга відтворила її настільки точно, що я навіть розплакалась. Це справжнє мистецтво."</p>
+      <div class="review-footer"><div class="review-ava">🌸</div><div><div class="review-name">Марія К.</div><div class="review-loc">Київ</div></div></div>
+    </div>
+    <div class="review-card reveal reveal-d1">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-body" data-key="r2">"Купила як подарунок мамі. Мама не могла повірити, що це ручна робота. Якість неймовірна, упаковка чудова."</p>
+      <div class="review-footer"><div class="review-ava">🌿</div><div><div class="review-name">Аня В.</div><div class="review-loc">Львів</div></div></div>
+    </div>
+    <div class="review-card reveal reveal-d2">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-body" data-key="r3">"Замовляли для нашого boutique. Клієнти в захваті, продаються миттєво. Вже плануємо другий замовлення."</p>
+      <div class="review-footer"><div class="review-ava">✦</div><div><div class="review-name">Studio Bloom</div><div class="review-loc" data-key="r3_loc">Бутик, Варшава</div></div></div>
+    </div>
+    <div class="review-card reveal reveal-d3">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-body" data-key="r4">"Ольга — справжній майстер своєї справи. Комунікація чудова, терміни дотримала, результат перевершив очікування."</p>
+      <div class="review-footer"><div class="review-ava">🌹</div><div><div class="review-name">Тетяна Р.</div><div class="review-loc">Одеса</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="cta-band-text">
+    <h2 data-key="cta_h">Маєте ідею?<br>Давайте <em>втілимо</em> її разом</h2>
+    <p data-key="cta_p">Надішліть фото або опишіть задумку — я відповім протягом 24 годин</p>
+  </div>
+  <div class="cta-band-btns">
+    <a href="custom.html" class="btn-white" data-key="cta_b1">Створити кастом</a>
+    <a href="catalog.html" class="btn-ghost-white" data-key="cta_b2">Дивитись каталог</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Pani Olga Krasulina</div>
+  <div class="footer-links">
+    <a href="catalog.html" data-key="nav_catalog">Каталог</a>
+    <a href="custom.html" data-key="nav_custom">Кастом</a>
+    <a href="about.html" data-key="nav_about">Про мене</a>
+    <a href="b2b.html" data-key="nav_b2b">B2B</a>
+  </div>
+  <div>© 2026 · Україна · Польща</div>
+</footer>
+
+<script>
+const T = {
+  uk:{
+    nav_home:'Головна',nav_catalog:'Каталог',nav_custom:'Кастом',nav_about:'Про мене',nav_b2b:'B2B',nav_cta:'Замовити',
+    hero_eyebrow:'Ручна робота · Авторський дизайн',
+    hero_sub:'Кожна — єдина у своєму роді',
+    hero_body:'Авторські прикраси з бісеру, створені вручну з любов\'ю до деталей. Від готових виробів до брошей за вашим фото — я втілюю будь-яку ідею.',
+    hero_btn1:'Переглянути каталог',hero_btn2:'Створити свою',
+    scroll_hint:'Гортайте',badge_text:'авторських робіт',
+    quote_text:'"Кожна брошка — маленьке мистецтво, яке ви носите з собою"',
+    about_label:'Про майстра',
+    about_p1:'Я створюю броші з бісеру вже кілька років. Кожна робота — не просто прикраса. Це діалог між майстром і тим, хто її носитиме.',
+    about_p2:'Мій підхід — тепло, увага до деталей і справжня ручна робота. Без масового виробництва. Без поспіху. Тільки якість і любов до справи.',
+    stat1:'Робіт',stat2:'Рейтинг',stat3:'Доставка',
+    cat_label:'Колекція',view_all:'Весь каталог',
+    tag_new:'Нове',tag_best:'Хіт',
+    p1_name:'«Цвітіння»',p1_price:'від 850 грн',
+    p2_name:'«Метелик»',p2_price:'від 950 грн',
+    p3_name:'«Лісова»',p3_price:'від 780 грн',
+    p4_name:'«Троянда»',p4_price:'від 1100 грн',
+    rev_label:'Відгуки',
+    r1:'"Замовляла брошку з фото моєї кішки. Ольга відтворила її настільки точно, що я навіть розплакалась. Це справжнє мистецтво."',
+    r2:'"Купила як подарунок мамі. Мама не могла повірити, що це ручна робота. Якість неймовірна, упаковка чудова."',
+    r3:'"Замовляли для нашого boutique. Клієнти в захваті, продаються миттєво. Вже плануємо другий замовлення."',
+    r4:'"Ольга — справжній майстер своєї справи. Комунікація чудова, терміни дотримала, результат перевершив очікування."',
+    r3_loc:'Бутик, Варшава',
+    cta_h:'Маєте ідею?\nДавайте втілимо її разом',
+    cta_p:'Надішліть фото або опишіть задумку — я відповім протягом 24 годин',
+    cta_b1:'Створити кастом',cta_b2:'Дивитись каталог',
+  },
+  pl:{
+    nav_home:'Strona główna',nav_catalog:'Katalog',nav_custom:'Custom',nav_about:'O mnie',nav_b2b:'B2B',nav_cta:'Zamów',
+    hero_eyebrow:'Ręcznie robione · Autorski design',
+    hero_sub:'Każda — jedyna w swoim rodzaju',
+    hero_body:'Autorskie broszki z koralików, tworzone ręcznie z miłością do detali. Od gotowych wyrobów po broszki według Twojego zdjęcia.',
+    hero_btn1:'Zobacz katalog',hero_btn2:'Stwórz swoją',
+    scroll_hint:'Przewijaj',badge_text:'autorskich prac',
+    quote_text:'"Każda broszka to małe dzieło sztuki, które nosisz ze sobą"',
+    about_label:'O twórczyni',
+    about_p1:'Tworzę broszki z koralików od kilku lat. Każda praca to nie tylko ozdoba — to dialog między twórcą a tą, która ją nosi.',
+    about_p2:'Moje podejście — ciepło, dbałość o szczegóły i prawdziwa ręczna robota. Bez masowej produkcji. Bez pośpiechu.',
+    stat1:'Prac',stat2:'Ocena',stat3:'Dostawa',
+    cat_label:'Kolekcja',view_all:'Cały katalog',
+    tag_new:'Nowość',tag_best:'Hit',
+    p1_name:'«Kwitnienie»',p1_price:'od 85 zł',
+    p2_name:'«Motylek»',p2_price:'od 95 zł',
+    p3_name:'«Leśna»',p3_price:'od 78 zł',
+    p4_name:'«Róża»',p4_price:'od 110 zł',
+    rev_label:'Opinie',
+    r1:'"Zamówiłam broszkę ze zdjęcia mojego kota. Olga odtworzyła go tak dokładnie, że się rozpłakałam. To prawdziwa sztuka."',
+    r2:'"Kupiłam jako prezent dla mamy. Nie mogła uwierzyć, że to ręczna robota. Jakość niesamowita, opakowanie cudowne."',
+    r3:'"Zamówiliśmy dla naszego boutique. Klientki zachwycone, sprzedają się błyskawicznie. Planujemy drugie zamówienie."',
+    r4:'"Olga to prawdziwy mistrz. Świetna komunikacja, dotrzymała terminów, wynik przeszedł oczekiwania."',
+    r3_loc:'Boutique, Warszawa',
+    cta_h:'Masz pomysł?\nRazem go zrealizujemy',
+    cta_p:'Wyślij zdjęcie lub opisz swój pomysł — odpowiem w ciągu 24 godzin',
+    cta_b1:'Zamów custom',cta_b2:'Zobacz katalog',
+  },
+  en:{
+    nav_home:'Home',nav_catalog:'Catalog',nav_custom:'Custom',nav_about:'About',nav_b2b:'B2B',nav_cta:'Order',
+    hero_eyebrow:'Handmade · Artisan Design',
+    hero_sub:'Every piece — one of a kind',
+    hero_body:'Artisan beaded brooches, handcrafted with love and attention to detail. From ready-made pieces to custom brooches made from your photo.',
+    hero_btn1:'View catalog',hero_btn2:'Create yours',
+    scroll_hint:'Scroll',badge_text:'artisan pieces',
+    quote_text:'"Each brooch is a small artwork you carry with you"',
+    about_label:'About the maker',
+    about_p1:'I\'ve been creating beaded brooches for several years. Every piece is more than jewelry — it\'s a conversation between maker and wearer.',
+    about_p2:'My approach — warmth, attention to detail, genuine handcraft. No mass production. No rush. Only quality and passion.',
+    stat1:'Pieces',stat2:'Rating',stat3:'Shipping',
+    cat_label:'Collection',view_all:'Full catalog',
+    tag_new:'New',tag_best:'Bestseller',
+    p1_name:'«Blossom»',p1_price:'from €22',
+    p2_name:'«Butterfly»',p2_price:'from €25',
+    p3_name:'«Forest»',p3_price:'from €20',
+    p4_name:'«Rose»',p4_price:'from €29',
+    rev_label:'Reviews',
+    r1:'"I ordered a brooch from my cat\'s photo. Olga reproduced it so accurately that I cried. Genuine art."',
+    r2:'"Bought as a birthday gift for my mom. She couldn\'t believe it was handmade. Incredible quality."',
+    r3:'"We ordered a batch for our boutique. Customers are delighted, they sell instantly."',
+    r4:'"Olga is a true master. Great communication, kept deadlines, exceeded all expectations."',
+    r3_loc:'Boutique, Warsaw',
+    cta_h:'Have an idea?\nLet\'s bring it to life together',
+    cta_p:'Send a photo or describe your idea — I\'ll reply within 24 hours',
+    cta_b1:'Create custom',cta_b2:'View catalog',
+  }
+};
+
+function setLang(l){
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${l}')"]`).classList.add('active');
+  const t=T[l];
+  document.querySelectorAll('[data-key]').forEach(el=>{
+    const k=el.getAttribute('data-key');
+    if(t[k]!==undefined) el.textContent=t[k];
+  });
+  document.documentElement.lang=l==='uk'?'uk':l==='pl'?'pl':'en';
+}
+
+window.addEventListener('scroll',()=>{
+  document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40);
+});
+
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
