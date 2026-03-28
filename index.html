@@ -420,7 +420,7 @@ footer {
 <section class="hero">
   <div class="hero-left">
     <div class="eyebrow" data-key="hero_eyebrow">Ручна робота · Авторський дизайн</div>
-    <h1 class="hero-title">Броші, що<br><em>розповідають</em><br>вашу історію</h1>
+    <h1 class="hero-title" data-key="hero_title">Броші, що<br><em>розповідають</em><br>вашу історію</h1>
     <p class="hero-sub" data-key="hero_sub">Кожна — єдина у своєму роді</p>
     <p class="hero-body" data-key="hero_body">Авторські прикраси з бісеру, створені вручну з любов'ю до деталей. Від готових виробів до брошей за вашим фото — я втілюю будь-яку ідею.</p>
     <div class="hero-btns">
@@ -458,7 +458,7 @@ footer {
   </div>
   <div class="about-content">
     <div class="section-label reveal" data-key="about_label">Про майстра</div>
-    <h2 class="section-title reveal">Мене звуть<br><em>Ольга</em></h2>
+    <h2 class="section-title reveal" data-key="about_title">Мене звуть<br><em>Ольга</em></h2>
     <p class="reveal reveal-d1" data-key="about_p1">Я створюю броші з бісеру вже кілька років. Кожна робота — не просто прикраса. Це діалог між майстром і тим, хто її носитиме.</p>
     <p class="reveal reveal-d2" data-key="about_p2">Мій підхід — тепло, увага до деталей і справжня ручна робота. Без масового виробництва. Без поспіху. Тільки якість і любов до справи.</p>
     <div class="stats-row reveal reveal-d3">
@@ -474,7 +474,7 @@ footer {
   <div class="section-header reveal">
     <div>
       <div class="section-label" data-key="cat_label">Колекція</div>
-      <h2 class="section-title" style="margin-bottom:0">Готові <em>роботи</em></h2>
+      <h2 class="section-title" style="margin-bottom:0" data-key="cat_title">Готові <em>роботи</em></h2>
     </div>
     <a href="catalog.html" class="view-all" data-key="view_all">Весь каталог</a>
   </div>
@@ -517,7 +517,7 @@ footer {
   <div class="section-header reveal">
     <div>
       <div class="section-label" data-key="rev_label">Відгуки</div>
-      <h2 class="section-title" style="margin-bottom:0">Що кажуть <em>клієнти</em></h2>
+      <h2 class="section-title" style="margin-bottom:0" data-key="rev_title">Що кажуть <em>клієнти</em></h2>
     </div>
   </div>
   <div class="reviews-track">
@@ -572,6 +572,7 @@ footer {
 const T = {
   uk:{
     nav_home:'Головна',nav_catalog:'Каталог',nav_custom:'Кастом',nav_about:'Про мене',nav_b2b:'B2B',nav_cta:'Замовити',
+    hero_title:'Броші, що розповідають вашу історію',
     hero_eyebrow:'Ручна робота · Авторський дизайн',
     hero_sub:'Кожна — єдина у своєму роді',
     hero_body:'Авторські прикраси з бісеру, створені вручну з любов\'ю до деталей. Від готових виробів до брошей за вашим фото — я втілюю будь-яку ідею.',
@@ -579,16 +580,17 @@ const T = {
     scroll_hint:'Гортайте',badge_text:'авторських робіт',
     quote_text:'"Кожна брошка — маленьке мистецтво, яке ви носите з собою"',
     about_label:'Про майстра',
+    about_title:'Мене звуть Ольга',
     about_p1:'Я створюю броші з бісеру вже кілька років. Кожна робота — не просто прикраса. Це діалог між майстром і тим, хто її носитиме.',
     about_p2:'Мій підхід — тепло, увага до деталей і справжня ручна робота. Без масового виробництва. Без поспіху. Тільки якість і любов до справи.',
     stat1:'Робіт',stat2:'Рейтинг',stat3:'Доставка',
-    cat_label:'Колекція',view_all:'Весь каталог',
+    cat_label:'Колекція',cat_title:'Готові роботи',view_all:'Весь каталог',
     tag_new:'Нове',tag_best:'Хіт',
     p1_name:'«Цвітіння»',p1_price:'від 850 грн',
     p2_name:'«Метелик»',p2_price:'від 950 грн',
     p3_name:'«Лісова»',p3_price:'від 780 грн',
     p4_name:'«Троянда»',p4_price:'від 1100 грн',
-    rev_label:'Відгуки',
+    rev_label:'Відгуки',rev_title:'Що кажуть клієнти',
     r1:'"Замовляла брошку з фото моєї кішки. Ольга відтворила її настільки точно, що я навіть розплакалась. Це справжнє мистецтво."',
     r2:'"Купила як подарунок мамі. Мама не могла повірити, що це ручна робота. Якість неймовірна, упаковка чудова."',
     r3:'"Замовляли для нашого boutique. Клієнти в захваті, продаються миттєво. Вже плануємо другий замовлення."',
@@ -600,6 +602,7 @@ const T = {
   },
   pl:{
     nav_home:'Strona główna',nav_catalog:'Katalog',nav_custom:'Custom',nav_about:'O mnie',nav_b2b:'B2B',nav_cta:'Zamów',
+    hero_title:'Broszki, które opowiadają Twoją historię',
     hero_eyebrow:'Ręcznie robione · Autorski design',
     hero_sub:'Każda — jedyna w swoim rodzaju',
     hero_body:'Autorskie broszki z koralików, tworzone ręcznie z miłością do detali. Od gotowych wyrobów po broszki według Twojego zdjęcia.',
@@ -607,16 +610,17 @@ const T = {
     scroll_hint:'Przewijaj',badge_text:'autorskich prac',
     quote_text:'"Każda broszka to małe dzieło sztuki, które nosisz ze sobą"',
     about_label:'O twórczyni',
+    about_title:'Nazywam się Olga',
     about_p1:'Tworzę broszki z koralików od kilku lat. Każda praca to nie tylko ozdoba — to dialog między twórcą a tą, która ją nosi.',
     about_p2:'Moje podejście — ciepło, dbałość o szczegóły i prawdziwa ręczna robota. Bez masowej produkcji. Bez pośpiechu.',
     stat1:'Prac',stat2:'Ocena',stat3:'Dostawa',
-    cat_label:'Kolekcja',view_all:'Cały katalog',
+    cat_label:'Kolekcja',cat_title:'Gotowe prace',view_all:'Cały katalog',
     tag_new:'Nowość',tag_best:'Hit',
     p1_name:'«Kwitnienie»',p1_price:'od 85 zł',
     p2_name:'«Motylek»',p2_price:'od 95 zł',
     p3_name:'«Leśna»',p3_price:'od 78 zł',
     p4_name:'«Róża»',p4_price:'od 110 zł',
-    rev_label:'Opinie',
+    rev_label:'Opinie',rev_title:'Co mówią klienci',
     r1:'"Zamówiłam broszkę ze zdjęcia mojego kota. Olga odtworzyła go tak dokładnie, że się rozpłakałam. To prawdziwa sztuka."',
     r2:'"Kupiłam jako prezent dla mamy. Nie mogła uwierzyć, że to ręczna robota. Jakość niesamowita, opakowanie cudowne."',
     r3:'"Zamówiliśmy dla naszego boutique. Klientki zachwycone, sprzedają się błyskawicznie. Planujemy drugie zamówienie."',
@@ -628,6 +632,7 @@ const T = {
   },
   en:{
     nav_home:'Home',nav_catalog:'Catalog',nav_custom:'Custom',nav_about:'About',nav_b2b:'B2B',nav_cta:'Order',
+    hero_title:'Brooches that tell your story',
     hero_eyebrow:'Handmade · Artisan Design',
     hero_sub:'Every piece — one of a kind',
     hero_body:'Artisan beaded brooches, handcrafted with love and attention to detail. From ready-made pieces to custom brooches made from your photo.',
@@ -635,16 +640,17 @@ const T = {
     scroll_hint:'Scroll',badge_text:'artisan pieces',
     quote_text:'"Each brooch is a small artwork you carry with you"',
     about_label:'About the maker',
+    about_title:'My name is Olga',
     about_p1:'I\'ve been creating beaded brooches for several years. Every piece is more than jewelry — it\'s a conversation between maker and wearer.',
     about_p2:'My approach — warmth, attention to detail, genuine handcraft. No mass production. No rush. Only quality and passion.',
     stat1:'Pieces',stat2:'Rating',stat3:'Shipping',
-    cat_label:'Collection',view_all:'Full catalog',
+    cat_label:'Collection',cat_title:'Ready-made pieces',view_all:'Full catalog',
     tag_new:'New',tag_best:'Bestseller',
     p1_name:'«Blossom»',p1_price:'from €22',
     p2_name:'«Butterfly»',p2_price:'from €25',
     p3_name:'«Forest»',p3_price:'from €20',
     p4_name:'«Rose»',p4_price:'from €29',
-    rev_label:'Reviews',
+    rev_label:'Reviews',rev_title:'What clients say',
     r1:'"I ordered a brooch from my cat\'s photo. Olga reproduced it so accurately that I cried. Genuine art."',
     r2:'"Bought as a birthday gift for my mom. She couldn\'t believe it was handmade. Incredible quality."',
     r3:'"We ordered a batch for our boutique. Customers are delighted, they sell instantly."',
@@ -660,9 +666,35 @@ function setLang(l){
   document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
   document.querySelector(`.lang-btn[onclick="setLang('${l}')"]`).classList.add('active');
   const t=T[l];
+  // Keys that contain HTML formatting
+  const htmlKeys = {
+    uk: {
+      hero_title:'Броші, що<br><em>розповідають</em><br>вашу історію',
+      about_title:'Мене звуть<br><em>Ольга</em>',
+      cat_title:'Готові <em>роботи</em>',
+      rev_title:'Що кажуть <em>клієнти</em>',
+      cta_h:'Маєте ідею?<br>Давайте <em>втілимо</em> її разом',
+    },
+    pl: {
+      hero_title:'Broszki, które<br><em>opowiadają</em><br>Twoją historię',
+      about_title:'Nazywam się<br><em>Olga</em>',
+      cat_title:'Gotowe <em>prace</em>',
+      rev_title:'Co mówią <em>klienci</em>',
+      cta_h:'Masz pomysł?<br>Razem go <em>zrealizujemy</em>',
+    },
+    en: {
+      hero_title:'Brooches that<br><em>tell</em><br>your story',
+      about_title:'My name is<br><em>Olga</em>',
+      cat_title:'Ready-made <em>pieces</em>',
+      rev_title:'What <em>clients</em> say',
+      cta_h:'Have an idea?<br>Let\'s <em>bring it to life</em> together',
+    },
+  };
   document.querySelectorAll('[data-key]').forEach(el=>{
     const k=el.getAttribute('data-key');
-    if(t[k]!==undefined) el.textContent=t[k];
+    const hk = htmlKeys[l] && htmlKeys[l][k];
+    if(hk !== undefined) el.innerHTML = hk;
+    else if(t[k]!==undefined) el.textContent=t[k];
   });
   document.documentElement.lang=l==='uk'?'uk':l==='pl'?'pl':'en';
 }
