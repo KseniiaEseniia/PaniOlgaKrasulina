@@ -373,25 +373,76 @@ footer {
 .reveal-d2 { transition-delay:.22s; }
 .reveal-d3 { transition-delay:.34s; }
 
+/* BURGER BUTTON */
+.burger {
+  display:none; flex-direction:column; gap:5px;
+  background:none; border:none; cursor:pointer; padding:4px;
+}
+.burger span { display:block; width:22px; height:2px; background:var(--graphite); transition:all .3s; }
+
+/* MOBILE DROPDOWN MENU */
+.mobile-menu {
+  display:none; position:fixed;
+  top:68px; left:0; right:0; z-index:190;
+  background:rgba(245,241,235,0.98);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(122,46,46,0.10);
+  flex-direction:column; padding:8px 0;
+}
+.mobile-menu.open { display:flex; }
+.mobile-menu a {
+  padding:14px 28px; font-size:13px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--mid);
+  text-decoration:none; transition:color .2s;
+  border-bottom:1px solid rgba(122,46,46,0.06);
+}
+.mobile-menu a:last-child { border-bottom:none; }
+.mobile-menu a:hover, .mobile-menu a.active { color:var(--burg); }
+
 /* MOBILE */
 @media(max-width:900px){
-  .nav { padding:0 24px; }
+  /* 1. Nav: показуємо бургер, ховаємо звичайні посилання */
+  .nav { padding:0 20px; }
   .nav-links { display:none; }
+  .burger { display:flex; }
+
+  /* 2. Hero: прибираємо накладання "Гортайте" */
   .hero { grid-template-columns:1fr; }
-  .hero-left { padding:80px 24px 56px; }
-  .hero-right { height:300px; }
+  .hero-left { padding:88px 24px 60px; }
+  .hero-right { height:260px; }
   .hero-badge { display:none; }
-  .scroll-hint { left:24px; }
+  .scroll-hint { display:none; }
+
+  /* 3. Stats: менший пропорційний шрифт */
+  .stats-row { padding-top:20px; margin-top:20px; gap:0; }
+  .stat { padding:0 8px; }
+  .stat-n { font-size:26px; }
+  .stat-l { font-size:9px; letter-spacing:.06em; }
+
+  /* About */
   .about-strip { grid-template-columns:1fr; }
-  .about-visual { min-height:260px; }
-  .about-quote-card { right:16px; bottom:16px; }
-  .about-content { padding:48px 24px; }
-  .catalog-section,.reviews-section { padding:64px 24px; }
+  .about-visual { min-height:200px; }
+  .about-big-emoji { font-size:72px; }
+  .about-quote-card { display:none; }
+  .about-content { padding:40px 24px; }
+
+  /* Catalog */
+  .catalog-section { padding:56px 24px; }
   .catalog-grid { grid-template-columns:repeat(2,1fr); }
-  .cta-band { flex-direction:column; padding:56px 24px; text-align:center; }
+  .section-header { flex-direction:column; align-items:flex-start; gap:12px; }
+
+  /* 4. Reviews: вертикальний стек замість горизонтального скролу */
+  .reviews-section { padding:56px 24px; }
+  .reviews-track { flex-direction:column; overflow-x:visible; gap:16px; padding-bottom:0; }
+  .review-card { min-width:unset; width:100%; }
+
+  /* CTA */
+  .cta-band { flex-direction:column; padding:48px 24px; text-align:center; }
   .cta-band-btns { flex-direction:column; width:100%; }
-  footer { flex-direction:column; gap:16px; text-align:center; padding:28px 24px; }
-  .section-header { flex-direction:column; align-items:flex-start; gap:16px; }
+  .btn-white, .btn-ghost-white { text-align:center; }
+
+  footer { flex-direction:column; gap:14px; text-align:center; padding:28px 24px; }
+  .footer-links { flex-wrap:wrap; justify-content:center; gap:16px; }
 }
 </style>
 </head>
@@ -413,8 +464,20 @@ footer {
       <button class="lang-btn" onclick="setLang('en')">EN</button>
     </div>
     <a href="custom.html" class="nav-cta" data-key="nav_cta">Замовити</a>
+    <button class="burger" id="burgerBtn" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="active" data-key="nav_home">Головна</a>
+  <a href="catalog.html" data-key="nav_catalog">Каталог</a>
+  <a href="custom.html" data-key="nav_custom">Кастом</a>
+  <a href="about.html" data-key="nav_about">Про мене</a>
+  <a href="b2b.html" data-key="nav_b2b">B2B</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -701,6 +764,20 @@ function setLang(l){
 
 window.addEventListener('scroll',()=>{
   document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40);
+});
+
+function toggleMenu(){
+  const menu = document.getElementById('mobileMenu');
+  menu.classList.toggle('open');
+}
+
+// Close menu on outside click
+document.addEventListener('click', e=>{
+  const menu = document.getElementById('mobileMenu');
+  const burger = document.getElementById('burgerBtn');
+  if(menu.classList.contains('open') && !menu.contains(e.target) && !burger.contains(e.target)){
+    menu.classList.remove('open');
+  }
 });
 
 const io=new IntersectionObserver(entries=>{
